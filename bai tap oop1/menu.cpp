@@ -3,14 +3,10 @@
 #include"sach.h"
 #include<iostream>
 #include<string>
+#include<iomanip>
+//#include"list.cpp"
 using namespace std;
-bool ascending(string ma1, string ma2)
-{
-	return ma1 < ma2;
-}
-bool decending(string ma1, string ma2) {
-	return ma1 > ma2;
-}
+
 menu::menu(){};
 void menu::mainmenu( list a) {
 	int check=0;
@@ -71,25 +67,32 @@ void menu::mainmenu( list a) {
 			cout << "Nhap ma Sach can thay doi thong tin: ";
 			cin.ignore();
 			getline(cin, newma);
-			cout << "Nhap ten moi: ";
-			getline(cin, newten);
-			cout << " Nhap nam Xuat ban: ";
-			cin >> newnamXB;
-			cout << "Nhap so luong con lai: ";
-			cin >> newsl;
-			a.update(newma, newten, newnamXB, newsl);
+			int check = 1;
+			for (int i = 0; i < a.getLength(); i++) {
+				if (a[i].getmaSach() == newma) {
+					cout << "Nhap ten moi: ";
+					getline(cin, newten);
+					cout << " Nhap nam Xuat ban: ";
+					cin >> newnamXB;
+					cout << "Nhap so luong con lai: ";
+					cin >> newsl;
+					a.update(newma, newten, newnamXB, newsl);
+					check = 0;
+				}
+			}
+			if(check==1) cout << "Khong ton tai sach co ma " << newma << endl;
 			break;
 		}
 		case 6: {
 			a.removeAt(0);
-			cout << "Da xoa sach o dau danh sach";
+			cout << "Da xoa sach o dau danh sach\n";
 			system("pause");
 			break;
 
 		}
 		case 7: {
 			a.removeAt(a.getLength()-1);
-			cout << "Da xoa sach o cuoi danh sach";
+			cout << "Da xoa sach o cuoi danh sach\n";
 			system("pause");
 			break;
 
@@ -106,7 +109,7 @@ void menu::mainmenu( list a) {
 			string ma;
 			cout << "Nhap ma sach can tim: ";
 			cin >> ma;
-			cout << "Thong tin sach can tim: \n";
+			
 			a.find(a.getLength() - 1, 0, ma);
 			system("pause");
 			break;
@@ -127,7 +130,7 @@ void menu::mainmenu( list a) {
 			break;
 		}
 		case 0: {
-			cout << "Da thoat";
+			cout << "Da thoat\n";
 			check = 1;
 			break;
 		}

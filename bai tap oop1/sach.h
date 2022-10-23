@@ -24,7 +24,7 @@ public:
 	bool gettinhTrang();
 	void settinhTrang(bool);
 	void show();
-	//void nhap();
+	int checkMaSach(const string&);
 	friend ostream& operator<<(ostream&, sach&);
 	friend istream& operator>>(istream&, sach&);
 	

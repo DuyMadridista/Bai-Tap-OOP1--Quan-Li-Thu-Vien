@@ -10,10 +10,19 @@ list::list() {
 	p=nullptr; 
 	length = 0;
 }
-
-sach& list::operator[](int index) {
+sach& list::operator[](int index) const{
 	return *(this->p + index);
 }
+list::list(const list& l) {
+	
+	length = l.length;
+	this->p = new sach[this->length];
+	for (int i = 0; i < this->length; i++) {
+		*(this->p + i) = l[i];
+	}
+};
+
+
 list::list(sach*& p, int length) {
 	this->p = p;
 	this->length = length;
@@ -48,6 +57,7 @@ void list::add(sach s, int idx) {
 		if (p[i].getmaSach() == s.getmaSach()) {
 			p[i].setsoQuyen(p[i].getsoQuyen() + s.getsoQuyen());
 			check = 1;
+			
 		}
 	}
 	if (check == 0) {
@@ -125,16 +135,25 @@ void list::update( string ms, string newName, int newnam, int newsl) {
 			p[i].setsoQuyen(newsl);
 			//p[i].settinhTrang(check);
 		}
+		
 	}
 	
 }
+bool ascending(string ma1, string ma2)
+{
+	return ma1 < ma2;
+}
+bool decending(string ma1, string ma2) {
+	return ma1 > ma2;
+}
 void list::find( int r,int l,string x) {
-	
+	QuickSort(0, length - 1);
 	if (r >= l) {
 		int mid = l + (r - 1) / 2; 	
 		if (x.compare(p[mid].getmaSach())==0)
 		{
-			
+			cout << "Thong tin sach can tim: \n";
+			cout << setw(5) << left << "STT " << setw(10) << left << "Ma sach" << setw(20) << left << "Ten Sach" << setw(18) << left << " Nam Xuat Ban" << setw(13) << left << " So Luong" << setw(10) << left << "Tinh Trang" << endl;
 			cout << p[mid];
 			return ;
 		}		

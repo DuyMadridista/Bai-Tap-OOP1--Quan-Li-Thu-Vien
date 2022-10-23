@@ -52,17 +52,51 @@ ostream& operator<<(ostream& out, sach& sach) {
 	//out << "Tinh Trang: " << sach.tinhTrang << endl;
 	return out;
 }
-istream& operator>>(istream& in, sach& sach) {
-	cout << "nhap ma sach: ";
-	in.ignore();
-	getline(in, sach.maSach);
-	cout << "nhap ten sach: ";
-	getline(in, sach.tenSach);
-	cout << "nhap nam XB: ";
-	cin >> sach.namXB;
-	cout << "nhap so luong: ";
-	cin >> sach.soQuyen;
-	if (sach.soQuyen == 0) sach.tinhTrang = false;
-	else sach.tinhTrang = true;
-	return in;
+int sach::checkMaSach(const string& id) {
+	if (id.size() != 5) return 0;
+	if (id[0] > '5' || id[0] < '1') return 0;
+	for (int i = 1; i <= 4; i++) {
+		if (id[i] > '9' || id[i] < '0') return 0;
+	}
+	return 1;
 }
+istream& operator>>(istream& in, sach& sach) {
+	while (1) {
+		cout << "nhap ma sach: ";
+		in >> sach.maSach;
+		if (sach.checkMaSach(sach.maSach)) {
+			cout << "nhap ten sach: ";
+			in.ignore();
+			getline(in, sach.tenSach);
+			cout << "nhap nam XB: ";
+			cin >> sach.namXB;
+			cout << "nhap so luong: ";
+			cin >> sach.soQuyen;
+			if (sach.soQuyen == 0) sach.tinhTrang = false;
+			else sach.tinhTrang = true;
+			return in;
+			break;
+		}
+		else cout << "Ma sach khong dung, moi nhap lai!!!" << endl;
+
+	}
+}
+	//do {
+	//	cout << "nhap ma sach: ";
+	//	/*in.ignore();*/
+	//	in>> sach.maSach;
+	//} while (!sach.checkMaSach(sach.maSach));
+	//	cout << "nhap ten sach: ";
+	//	in.ignore();
+	//	getline(in, sach.tenSach);
+	//	cout << "nhap nam XB: ";
+	//	cin >> sach.namXB;
+	//	cout << "nhap so luong: ";
+	//	cin >> sach.soQuyen;
+	//	if (sach.soQuyen == 0) sach.tinhTrang = false;
+	//	else sach.tinhTrang = true;
+	//	return in;
+	//
+	
+	
+//}
